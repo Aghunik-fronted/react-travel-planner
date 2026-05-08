@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Тайны Бали",
+    "country": "Индонезия",
+    "type": "Пляжный",
+    "duration": "10 дней",
+    "price": 1200,
+    "rating": 4.8,
+    "description": "Белоснежные пляжи, древние храмы и рисовые террасы.",
+    "image": "https://unsplash.com"
+  },
+  {
+    "id": 2,
+    "name": "Альпийская сказка",
+    "country": "Швейцария",
+    "type": "Активный",
+    "duration": "7 дней",
+    "price": 2500,
+    "rating": 4.9,
+    "description": "Горные лыжи, чистейший воздух и уютные шале.",
+    "image": "https://unsplash.com"
+  },
+  {
+    "id": 3,
+    "name": "Римские каникулы",
+    "country": "Италия",
+    "type": "Экскурсионный",
+    "duration": "5 дней",
+    "price": 800,
+    "rating": 4.7,
+    "description": "Погружение в историю вечного города и дегустация пасты.",
+    "image": "https://unsplash.com"
+  }
+]
