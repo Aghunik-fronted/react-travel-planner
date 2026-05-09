@@ -16,12 +16,12 @@ function Header() {
                     Главная
                 </NavLink>
                 <NavLink
-                    to="/"
+                    to="/favorites"
                     className={({ isActive }) => `relative ${isActive ? 'text-blue-600 font-medium' : 'hover:text-blue-500'}`}
                 >
                     Избранное
                     { favorites.length > 0 && (
-                        <span className='absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse'>
+                        <span className='absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center'>
                             {favorites.length}
                         </span>
                     )}

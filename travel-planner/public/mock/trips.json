@@ -8,7 +8,7 @@
     "price": 1200,
     "rating": 4.8,
     "description": "Белоснежные пляжи, древние храмы и рисовые террасы.",
-    "image": "https://unsplash.com"
+    "image": "/images/trip1.jpg"
   },
   {
     "id": 2,
@@ -19,7 +19,7 @@
     "price": 2500,
     "rating": 4.9,
     "description": "Горные лыжи, чистейший воздух и уютные шале.",
-    "image": "https://unsplash.com"
+    "image": "/images/trip2.jpg"
   },
   {
     "id": 3,
@@ -30,6 +30,6 @@
     "price": 800,
     "rating": 4.7,
     "description": "Погружение в историю вечного города и дегустация пасты.",
-    "image": "https://unsplash.com"
+    "image": "/images/trip3.webp"
   }
 ]

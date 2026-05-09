@@ -14,7 +14,7 @@ const favoritesReducer = (state, action) => {
             case 'REMOVE_FAVORITE':
                 return state.filter(item => item.id !== action.payload);
 
-            case 'CLEAR_ALԼ':
+            case 'CLEAR_ALL':
                 return [];
 
             default:
