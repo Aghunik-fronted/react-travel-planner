@@ -50,7 +50,9 @@ function TripPage() {
                         <MapPin size={16} />
                         {trip.country}
                     </div>
-                    <h1 className='text-5xl font-black text-gray-900 leading-tight'>{trip.name}</h1>
+                    <h1 className='text-3xl lg:text-5xl font-black text-gray-900 leading-tight'>
+                        {trip.name}
+                    </h1>
                     <div className='flex items-center gap-6'>
                         <div className='flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-full'>
                             <Star size={18} className='fill-yellow-400 text-yellow-400'/>
@@ -66,12 +68,16 @@ function TripPage() {
                     <h3 className='font-bold text-gray-900 mb-2'>Об отдыхе</h3>
                     <p className='text-gray-600 leading-relaxed text-lg'>{trip.description}</p>
                 </div>
-                <div className='pt-8 border-t border-gray-100 flex items-center justify-between'>
-                    <div>
-                        <p className='text-gray-400 text-sm font-medium uppercase tracking-wider'>Итоговая цена</p>
-                        <p className='text-4xl font-black text-blue-600'>${trip.price}</p>
+                <div className='pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-6'>
+                    <div className="text-center sm:text-left">
+                        <p className='text-gray-400 text-xs sm:text-sm font-medium uppercase tracking-wider'>
+                            Итоговая цена
+                        </p>
+                        <p className='text-3xl lg:text-4xl font-black text-blue-600'>
+                            ${trip.price}
+                        </p>
                     </div>
-                    <button className='bg-gray-900 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-blue-600 transition-all shadow-xl shadow-gray-200 active:scale-95 cursor-pointer'>
+                    <button className='w-full sm:w-auto bg-gray-900 text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-bold text-base lg:text-lg hover:bg-blue-600 transition-all shadow-xl active:scale-95 cursor-pointer'>
                         Забронировать
                     </button>
                 </div>

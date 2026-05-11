@@ -8,9 +8,10 @@ function TripCard({ trip, viewMode = 'grid' }) {
   const isList = viewMode === 'list';
 
   return (
-    <div className={`group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex ${isList ? 'flex-row h-72' : 'flex-col h-full'}`}>
+    <div className={`group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col 
+      ${isList ? 'sm:flex-row sm:h-72' : 'h-full'}`}>
         
-        <div className={`relative overflow-hidden ${isList ? 'w-1/3 min-w-[300px]' : 'h-64 w-full'}`}>
+        <div className={`relative overflow-hidden shrink-0 ${isList ? 'h-56 sm:h-full sm:w-1/3 sm:min-w-[300px]' : 'h-64 w-full'}`}>
             <img 
                 src={trip.image}
                 alt={trip.name}
@@ -25,18 +26,18 @@ function TripCard({ trip, viewMode = 'grid' }) {
             <FavoriteButton trip={trip} className='absolute top-4 right-4 z-10 cursor-pointer' />
         </div>
 
-        <div className={`p-6 flex flex-col grow ${isList ? 'justify-between' : ''}`}>
+        <div className={`p-6 flex flex-col grow ${isList ? 'sm:justify-between' : ''}`}>
             <div className='flex justify-between items-start mb-2'>
                 <div>
                     <p className='text-blue-600 text-xs font-bold uppercase tracking-wider mb-1'>{trip.country}</p>
-                    <h3 className={`font-bold text-gray-900 group-hover:text-blue-600 transition-colors ${isList ? 'text-2xl' : 'text-xl'}`}>
+                    <h3 className={`font-bold text-gray-900 group-hover:text-blue-600 transition-colors ${isList ? 'sm:text-2xl text-xl' : 'text-xl'}`}>
                         {trip.name}
                     </h3>
                 </div>
             </div>
-
+            
             {isList && (
-                <p className="text-gray-500 text-sm line-clamp-3 my-2">
+                <p className="hidden sm:block text-gray-500 text-sm line-clamp-3 my-2">
                     {trip.description}
                 </p>
             )}
@@ -49,7 +50,7 @@ function TripCard({ trip, viewMode = 'grid' }) {
                 <div className='px-2 py-0.5 bg-gray-100 rounded text-xs'>{trip.type}</div>
             </div>
 
-            <div className={`mt-auto pt-6 flex items-center justify-between border-t border-gray-50 ${isList ? 'mt-4' : ''}`}>
+            <div className={`mt-auto pt-6 flex items-center justify-between border-t border-gray-50 ${isList ? 'sm:mt-4' : ''}`}>
                 <div>
                     <span className='text-2xl font-black text-gray-900'>${trip.price}</span>
                     <span className='text-gray-400 text-sm'>/чел</span>
