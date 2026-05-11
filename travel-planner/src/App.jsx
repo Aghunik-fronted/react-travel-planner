@@ -9,7 +9,7 @@ import NotFoundPage from './pages/NotFoundPage';
 function App() {
   return (
     <FavoritesProvider>
-      <HashRouter> {/* Заменяем BrowserRouter на HashRouter */}
+      <HashRouter> 
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<TripsPage />} />

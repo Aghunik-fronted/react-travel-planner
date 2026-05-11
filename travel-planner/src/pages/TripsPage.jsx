@@ -15,11 +15,11 @@ function TripsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState('');
-  const [selectedType, setSelectedType] = useState('');
-  const [viewMode, setViewMode] = useState('grid');
-  const [sortBy, setSortBy] = useState('default');
+  const [searchQuery, setSearchQuery] = useState(localStorage.getItem('filter_search') || '');
+  const [selectedCountry, setSelectedCountry] = useState(localStorage.getItem('filter_country') || '');
+  const [selectedType, setSelectedType] = useState(localStorage.getItem('filter_type') || '');
+  const [viewMode, setViewMode] = useState(localStorage.getItem('view_mode') || 'grid');
+  const [sortBy, setSortBy] = useState(localStorage.getItem('filter_sort') || 'default');
 
   useEffect(() => {
     setLoading(true);
@@ -39,6 +39,14 @@ function TripsPage() {
         setLoading(false);
       });
   }, []);
+
+useEffect(() => {
+    localStorage.setItem('filter_country', selectedCountry);
+    localStorage.setItem('filter_type', selectedType);
+    localStorage.setItem('filter_search', searchQuery);
+    localStorage.setItem('filter_sort', sortBy);
+    localStorage.setItem('view_mode', viewMode);
+  }, [selectedCountry, selectedType, searchQuery, sortBy, viewMode]);
 
 const filteredTrips = trips.filter((trip) => {
     const search = searchQuery.toLowerCase().trim();
@@ -82,7 +90,6 @@ const filteredTrips = trips.filter((trip) => {
         </p>
       </section>
 
-      {/* Панель фильтров (4 колонки на больших экранах) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-white p-6 rounded-3xl shadow-xl shadow-gray-100 border border-gray-50">
         <div className="flex flex-col gap-2">
           <SearchForm value={searchQuery} onChange={setSearchQuery} />
@@ -99,7 +106,6 @@ const filteredTrips = trips.filter((trip) => {
         <SortSelect value={sortBy} onChange={setSortBy} />
       </div>
 
-      {/* Инфо-панель: счетчик и переключатель вида */}
       <div className="flex items-center gap-4 px-2">
         <div className="h-px grow bg-gray-100"></div>
         <p className="text-sm text-gray-400 font-medium italic">
@@ -108,7 +114,6 @@ const filteredTrips = trips.filter((trip) => {
         <ViewToggle viewMode={viewMode} setViewMode={setViewMode} />
       </div>
 
-      {/* Список карточек */}
       {sortedTrips.length > 0 ? (
         <div className={
           viewMode === 'grid' 
