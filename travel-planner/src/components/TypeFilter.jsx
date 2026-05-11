@@ -1,23 +1,56 @@
-import React from 'react';
-import { ChevronDown } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ChevronDown, Check } from 'lucide-react';
 
 function TypeFilter({ value, onChange, options }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
-    <div className="relative">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none bg-white cursor-pointer appearance-none pr-10 transition-all text-gray-700"
-      >
-        <option value="">Любой тип отдыха</option>
-        {options.map((type) => (
-          <option key={type} value={type}>{type}</option>
-        ))}
-      </select>
-      <ChevronDown 
-        size={18} 
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" 
-      />
+    <div className="flex flex-col gap-2" ref={dropdownRef}>
+       <label className="text-xs font-bold text-gray-400 ml-2 uppercase tracking-widest text-center md:text-left">
+            Категория
+        </label>
+        <div className="relative">
+            <button
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-3xl text-left text-gray-700 flex justify-between items-center transition-all hover:bg-white hover:shadow-lg focus:ring-4 focus:ring-blue-100 outline-none"
+            >
+                <span className="truncate">{value || "Любой тип отдыха"}</span>
+                <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isOpen && (
+                <div className="absolute top-full left-0 w-full mt-2 bg-white border border-gray-100 rounded-3xl shadow-2xl z-50 py-2 overflow-hidden animate-in fade-in slide-in-from-top-1">
+                    <div 
+                        className="px-5 py-3 hover:bg-blue-50 cursor-pointer flex justify-between items-center text-gray-600 transition-colors"
+                        onClick={() => { onChange(""); setIsOpen(false); }}
+                    >       
+                        Все типы
+                        {!value && <Check size={16} className="text-blue-600" />}
+                    </div>
+            
+                    {options.map((opt) => (
+                        <div
+                            key={opt}
+                            className="px-5 py-3 hover:bg-blue-50 cursor-pointer flex justify-between items-center text-gray-700 font-medium transition-colors"
+                            onClick={() => { onChange(opt); setIsOpen(false); }}
+                        >
+                            {opt}
+                            {value === opt && <Check size={16} className="text-blue-600" />}
+                        </div>
+                    ))}
+                </div>
+             )}
+        </div>
     </div>
   );
 }

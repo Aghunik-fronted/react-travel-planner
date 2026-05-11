@@ -1,4 +1,4 @@
-import { FavoritesProvider } from './context/FavoritesContext'; // Добавьте это!
+import { FavoritesProvider } from './context/FavoritesContext'; 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import TripsPage from './pages/TripsPage';

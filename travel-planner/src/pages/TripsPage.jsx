@@ -8,6 +8,7 @@ import CountryFilter from '../components/CountryFilter';
 import TypeFilter from '../components/TypeFilter';
 import SortSelect from '../components/SortSelect'; 
 import { LayoutGrid, List } from 'lucide-react';
+import ViewToggle from '../components/ViewToggle';
 
 function TripsPage() {
   const [trips, setTrips] = useState([]);
@@ -39,12 +40,20 @@ function TripsPage() {
       });
   }, []);
 
-  const filteredTrips = trips.filter((trip) => {
-    const matchesSearch = trip.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCountry = selectedCountry ? trip.country === selectedCountry : true;
-    const matchesType = selectedType ? trip.type === selectedType : true;
-    return matchesSearch && matchesCountry && matchesType;
-  });
+const filteredTrips = trips.filter((trip) => {
+    const search = searchQuery.toLowerCase().trim();
+
+    const matchesSearch = searchQuery === '' ? true : [trip.name, trip.country].some(text => 
+        text.toLowerCase().split(' ').some(word => 
+        word.startsWith(searchQuery.toLowerCase().trim())
+        )
+    );
+
+  const matchesCountry = selectedCountry ? trip.country === selectedCountry : true;
+  const matchesType = selectedType ? trip.type === selectedType : true;
+
+  return matchesSearch && matchesCountry && matchesType;
+});
 
   const sortedTrips = [...filteredTrips].sort((a, b) => {
     if (sortBy === 'price-asc') return a.price - b.price;
@@ -76,17 +85,14 @@ function TripsPage() {
       {/* Панель фильтров (4 колонки на больших экранах) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-white p-6 rounded-3xl shadow-xl shadow-gray-100 border border-gray-50">
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-400 ml-2 uppercase">Поиск</label>
           <SearchForm value={searchQuery} onChange={setSearchQuery} />
         </div>
         
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-400 ml-2 uppercase">Страна</label>
           <CountryFilter value={selectedCountry} onChange={setSelectedCountry} options={countries} />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-bold text-gray-400 ml-2 uppercase">Категория</label>
           <TypeFilter value={selectedType} onChange={setSelectedType} options={types} />
         </div>
 
@@ -99,21 +105,7 @@ function TripsPage() {
         <p className="text-sm text-gray-400 font-medium italic">
           Найдено вариантов: <span className="text-blue-600 font-bold not-italic">{filteredTrips.length}</span>
         </p>
-  
-        <div className='flex gap-1 bg-white p-1 rounded-lg shadow-sm border border-gray-100'>
-          <button 
-            onClick={() => setViewMode('grid')}
-            className={`p-2 rounded-md transition-all cursor-pointer ${viewMode === 'grid' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-400 hover:bg-gray-50'}`}
-          >
-            <LayoutGrid size={20} />
-          </button>
-          <button 
-            onClick={() => setViewMode('list')}
-            className={`p-2 rounded-md transition-all cursor-pointer ${viewMode === 'list' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-400 hover:bg-gray-50'}`}
-          >
-            <List size={20} />
-          </button>
-        </div>
+        <ViewToggle viewMode={viewMode} setViewMode={setViewMode} />
       </div>
 
       {/* Список карточек */}
