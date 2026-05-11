@@ -14,7 +14,7 @@ function TripPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/mock/trips.json')
+    fetch(' /react-travel-planner/mock/trips.json')
       .then(res => res.json())
       .then(data => {
         const found = data.find(t => t.id === Number(id));

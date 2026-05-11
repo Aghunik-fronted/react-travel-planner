@@ -23,7 +23,7 @@ function TripsPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/mock/trips.json')
+    fetch('/react-travel-planner/mock/trips.json')
       .then((res) => {
         if (!res.ok) throw new Error('Не удалось загрузить данные');
         return res.json();
